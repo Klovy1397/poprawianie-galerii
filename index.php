@@ -14,9 +14,48 @@ $podstrony = [
     ],
     4 => [
         'nazwa' => 'Galeria',
-        'tresc' => 'To się nie wyświetli'
-    ],
+        'tresc' => '...'
+    ]
 ];
+
+$zdjecia = [
+        'Losowe zdjęcie 1' => "https://picsum.photos/300/200?random=1",
+        'Losowe zdjęcie 2' => "https://picsum.photos/300/200?random=2",
+        'Losowe zdjęcie 3' => "https://picsum.photos/300/200?random=3"  
+];
+
+$media = [
+    [
+    'link' => "https://www.youtube.com" ,
+    'foto' => "https://cdn.iconscout.com/icon/free/png-256/free-youtube-logo-icon-download-in-svg-png-gif-file-formats--social-media-70-flat-icons-color-pack-logos-432560.png?f=webp&w=256"
+    ],
+    [
+    'link' => "https://www.discord.com", 
+    'foto' => "https://darkanddarker.wiki.spellsandguns.com/images/thumb/1/15/Discord_logo.webp/213px-Discord_logo.webp.png"
+    ],
+    [
+    'link' => "https://telegram.org",
+    'foto' => "https://upload.wikimedia.org/wikipedia/commons/thumb/8/82/Telegram_logo.svg/1024px-Telegram_logo.svg.png"
+    ],           
+];
+
+$reklama = [
+        ['reklama' => "https://www.adidas.pl/",],
+        ['reklama' => "https://www.nike.com/pl/",],
+        ['reklama' => "https://www.flashscore.pl/",],
+        ['reklama' => "https://www.zara.com",],
+        ['reklama' => "https://www.asos.com",],
+        ['reklama' => "https://www.hm.com",],
+        ['reklama' => "https://us.shein.com",],
+        ['reklama' => "https://www.express.com",],
+        ['reklama' => "https://www.shopbop.com",]
+
+];
+
+$losowyKlucz = array_rand($reklama);
+$wybranaReklama = $reklama[$losowyKlucz]['reklama'];
+
+
 // Pobieranie id podstrony z URL
 $id = isset($_GET['id']) ? (int)$_GET['id'] : 1; // Domyślnie ustawiamy na 1
 
@@ -46,23 +85,22 @@ if (!isset($podstrony[$id])) {
 		</header>
 		<div>
 			<main>
-				<article>
-					<?php 
+                <?php 
                     if ($id!=4){
                         echo '<h2>'.$podstrony[$id]['nazwa'].'</h2>'; 
                         echo '<p>'.$podstrony[$id]['tresc'].'</p>';
                     }
                     else {
                         echo '<h2>'.$podstrony[$id]['nazwa'].'</h2>';
-                        include ('gallery.php');  
+                        include ('podstrona.php');  
                     }
                     ?>
-					
 				</article>
 				<article>
-					<h2>Stały artykuł</h2>
-					<p>Nam id rutrum velit. Ut gravida tristique neque et pretium. Sed eget viverra orci. </p>
-                    <p>Praesent vulputate, mi id auctor commodo, sapien augue rhoncus justo, non malesuada nibh diam nec dolor. </p>
+					<h2>Stały artykuł</h2> 
+                    <img src="<?php echo $zdjecia['Losowe zdjęcie 1']; ?>" alt="Losowe zdjęcie 1">
+                    <img src="<?php echo $zdjecia['Losowe zdjęcie 2']; ?>" alt="Losowe zdjęcie 2">
+                    <img src="<?php echo $zdjecia['Losowe zdjęcie 3']; ?>" alt="Losowe zdjęcie 3">
 				</article>
 			
 			</main>
@@ -78,22 +116,19 @@ if (!isset($podstrony[$id])) {
 				</nav>
 				<section>
 					<h3>Reklamy</h3>
-					<p>Pozdrowienia dla 4P...</p>
+                    <?php
+                    echo "<a href=\"$wybranaReklama\">Kliknij tutaj, aby zobaczyć reklamę</a>";
+                    ?>
 				</section>
 				<section>
 					<h3>Social media</h3>
-					<p><?php
-	$link = "https://www.youtube.com/";
-
-
-			echo '<a href="' . $link . '">Przejdź do Youtube.com</a>';
-
-	$link = "https://www.tiktok.com/pl-PL/";
-
-
-		echo '<a href="' . $link . '"><br>Przejdź do TikTok.com</br></a>';
-		?>
-		</p>
+                       <?php             
+                        foreach ($media as $item) {
+                            echo '<a href="' . $item['link'] . '" target="_blank">';
+                            echo '<img src="' . $item['foto'] . '" alt="Logo" style="width: 50px; height: 50px; margin-right: 10px;">';
+                            echo '</a>';
+                        }
+                        ?>
 				</section>
 			</aside>
 		</div>
