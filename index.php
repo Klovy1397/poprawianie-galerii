@@ -21,7 +21,7 @@ $podstrony = [
 $zdjecia = [
         'Losowe zdjęcie 1' => "https://picsum.photos/300/200?random=1",
         'Losowe zdjęcie 2' => "https://picsum.photos/300/200?random=2",
-        'Losowe zdjęcie 3' => "https://picsum.photos/300/200?random=3"  
+        'Losowe zdjęcie 3' => "https://picsum.photos/300/200?random=3", 
 ];
 
 $media = [
@@ -85,19 +85,21 @@ if (!isset($podstrony[$id])) {
 		</header>
 		<div>
 			<main>
-                <?php 
+				<article>
+					<?php 
                     if ($id!=4){
                         echo '<h2>'.$podstrony[$id]['nazwa'].'</h2>'; 
                         echo '<p>'.$podstrony[$id]['tresc'].'</p>';
                     }
                     else {
                         echo '<h2>'.$podstrony[$id]['nazwa'].'</h2>';
-                        include ('podstrona.php');  
+                        include ('gallery.php');  
                     }
                     ?>
+					
 				</article>
 				<article>
-					<h2>Stały artykuł</h2> 
+				<h2>Stały artykuł</h2> 
                     <img src="<?php echo $zdjecia['Losowe zdjęcie 1']; ?>" alt="Losowe zdjęcie 1">
                     <img src="<?php echo $zdjecia['Losowe zdjęcie 2']; ?>" alt="Losowe zdjęcie 2">
                     <img src="<?php echo $zdjecia['Losowe zdjęcie 3']; ?>" alt="Losowe zdjęcie 3">
@@ -116,13 +118,11 @@ if (!isset($podstrony[$id])) {
 				</nav>
 				<section>
 					<h3>Reklamy</h3>
-                    <?php
-                    echo "<a href=\"$wybranaReklama\">Kliknij tutaj, aby zobaczyć reklamę</a>";
-                    ?>
+					<p>Pozdrowienia dla 4P...</p>
 				</section>
 				<section>
 					<h3>Social media</h3>
-                       <?php             
+					<?php             
                         foreach ($media as $item) {
                             echo '<a href="' . $item['link'] . '" target="_blank">';
                             echo '<img src="' . $item['foto'] . '" alt="Logo" style="width: 50px; height: 50px; margin-right: 10px;">';
