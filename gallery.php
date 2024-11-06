@@ -1,18 +1,18 @@
 <?php
 // Tablica zdjęć
 $photos = [
-    ['img_id' => 1, 'img' => "/img/img1.jpg", 'opis' => 'A beautiful sunset.', 'category_id' => 1],
-    ['img_id' => 2, 'img' => "/img/img2.jpg", 'opis' => 'A serene beach.', 'category_id' => 2],
-    ['img_id' => 3, 'img' => "/img/img3.jpg", 'opis' => 'A blooming flower.', 'category_id' => 3],
-    ['img_id' => 4, 'img' => "/img/img4.jpg", 'opis' => 'Snow-covered mountains.', 'category_id' => 1],
-    ['img_id' => 5, 'img' => "/img/img5.jpg", 'opis' => 'A forest in autumn.', 'category_id' => 3],
-    ['img_id' => 6, 'img' => "/img/img6.jpg", 'opis' => 'City skyline at night.', 'category_id' => 2],
-    ['img_id' => 7, 'img' => "/img/img7.jpg", 'opis' => 'A waterfall flowing.', 'category_id' => 3],
-    ['img_id' => 8, 'img' => "/img/img8.jpg", 'opis' => 'A boat on a calm lake.', 'category_id' => 1],
-    ['img_id' => 9, 'img' => "/img/img9.jpg", 'opis' => 'A field of lavender.', 'category_id' => 2],
-    ['img_id' => 10, 'img' => "/img/img10.jpg", 'opis' => 'A snowy forest.', 'category_id' => 1],
-    ['img_id' => 11, 'img' => "/img/img11.jpg", 'opis' => 'Aerial view of coral.', 'category_id' => 3],
-    ['img_id' => 12, 'img' => "/img/img12.jpg", 'opis' => 'Market square.', 'category_id' => 2],
+    ['img_id'=>1, 'img'=>'img/img1.jpg', 'opis'=>'A beautiful sunset.', 'category_id'=>1],
+    ['img_id'=>2, 'img'=>'img/img2.jpg', 'opis'=>'A serene beach.', 'category_id' => 2],
+    ['img_id'=>3, 'img'=>'img/img3.jpg', 'opis'=>'A blooming flower.', 'category_id' => 3],
+    ['img_id'=>4, 'img'=>'img/img4.jpg', 'opis'=>'Snow-covered mountains.', 'category_id' => 1],
+    ['img_id'=>5, 'img'=>'img/img5.jpg', 'opis'=>'A forest in autumn.', 'category_id' => 3],
+    ['img_id'=>6, 'img'=>'img/img6.jpg', 'opis'=>'City skyline at night.', 'category_id' => 2],
+    ['img_id'=>7, 'img'=>'img/img7.jpg', 'opis'=>'A waterfall flowing.', 'category_id' => 3],
+    ['img_id'=>8, 'img'=>'img/img8.jpg', 'opis'=>'A boat on a calm lake.', 'category_id' => 1],
+    ['img_id'=>9, 'img'=>'img/img9.jpg', 'opis'=>'A field of lavender.', 'category_id' => 2],
+    ['img_id'=>10, 'img'=>'img/img10.jpg', 'opis'=>'A snowy forest.', 'category_id'=>1],
+    ['img_id'=>11, 'img'=>'img/img11.jpg', 'opis'=>'Aerial view of coral.', 'category_id'=>3],
+    ['img_id'=>12, 'img'=>'img/img12.jpg', 'opis'=>'Market square.', 'category_id' => 3],
 ];
 
 // Tablica kategorii
@@ -23,6 +23,21 @@ $categories = [
     ['category_id'=>4, 'name'=>'New']
 ];
 
+$comments = [
+    ['comment_id'=>1, 'photo_id'=>1, 'ocena'=>5, 'tresc'=>'Ładne'],
+    ['comment_id'=>1, 'photo_id'=>1, 'ocena'=>3, 'tresc'=>'Dość ładne'],
+    ['comment_id'=>1, 'photo_id'=>1, 'ocena'=>4, 'tresc'=>'Bardzio ładne'],
+    ['comment_id'=>1, 'photo_id'=>2, 'ocena'=>4, 'tresc'=>'Jest spoko']
+];
+
+function photo_comment($photo_id, $comments_table) {
+    foreach ($comments_table as $comment) {
+        if ($photo_id == $comment['photo_id']){
+            echo 'Ocena: '.$comment['ocena'].' - '.$comment['tresc'].' <br>';
+        }
+    }
+  }
+
 // Funkcja zwracająca nazwę kategorii na podstawie jej ID
 function getCategoryName($category_id, $categories) {
     foreach ($categories as $category) {
@@ -30,8 +45,9 @@ function getCategoryName($category_id, $categories) {
             return $category['name'];
         }
     }
-    return 'Unknown'; 
+    return 'Unknown';
 }
+
 // Sprawdzenie, czy przekazano identyfikator zdjęcia w zmiennej GET
 if (isset($_GET['img_id'])) {
     $img_id = (int)$_GET['img_id'];
@@ -41,25 +57,10 @@ if (isset($_GET['img_id'])) {
         if ($photo['img_id'] == $img_id) {
             // Wyświetl powiększone zdjęcie
             $category_name = getCategoryName($photo['category_id'], $categories);
-            echo '<img src="' . $photo['img'] . '" style="width:500px;"><br>';
-            echo '<h2>' . $photo['opis'] . '</h2>';
-            echo '<p>Kategoria: <a href="?id=4&category_id='.$photo['category_id'].'">'.getCategoryName($photo['category_id'], $categories).'</a></p>';
-        }
-    }
-} else 
-    // Sprawdzenie, czy przekazano identyfikator zdjęcia w zmiennej GET
-if (isset($_GET['img_id'])) {
-    $img_id = (int)$_GET['img_id'];
-
-    // Wyszukaj zdjęcie o podanym ID
-    foreach ($photos as $photo) {
-        if ($photo['img_id'] == $img_id) {
-            // Wyświetl powiększone zdjęcie
-            $category_name = getCategoryName($photo['category_id'], $categories);
             echo '<h2>' . $photo['opis'] . '</h2>';
             echo '<img src="' . $photo['img'] . '" style="width:500px;"><br>';
-            echo '<p>Kategoria: <a href="?id=4&category_id='.$photo['category_id'].'">'.getCategoryName($photo['category_id'], $categories).'</a></p>';
-            echo '<a href="?id=4">Back to gallery</a>';
+            photo_comment($img_id, $comments);
+            echo 'Kategoria: <a href="?id=4&category_id='.$photo['category_id'].'">'.getCategoryName($photo['category_id'], $categories).'</a>';
         }
     }
 } else {
@@ -68,42 +69,48 @@ if (isset($_GET['img_id'])) {
         $category_id = (int)$_GET['category_id'];
 
         // Wyświetl miniatury tylko z wybranej kategorii
-echo '<div style="display: flex; flex-wrap: wrap; justify-content: space-between;">';
+        echo '<h2>Photos in ' . getCategoryName($category_id, $categories) . '</h2>';
+        echo '<div style="display: flex; flex-wrap: wrap;">';
 
-foreach ($photos as $photo) {
-    if ($photo['category_id'] == $category_id) {
-        echo '<div style="flex: 0 1 calc(33.33% - 20px); margin: 10px; text-align: center; box-sizing: border-box;">';
-        echo '<a href="?id=4&img_id=' . $photo['img_id'] . '" style="display: block; width: 100%;">';
-        // Dodanie stylu dla rozmiaru obrazka i kontenera
-        echo '<div style="width: 100%; padding-top: 75%; position: relative; overflow: hidden; margin: 0 auto;">';
-        echo '<img src="' . $photo['img'] . '" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover;">';
-        echo '</div>';
-        echo '</a>';
-        echo '<p>' . $photo['opis'] . '</p>';
-        echo '<p>Category: <a href="?id=4&category_id=' . $photo['category_id'] . '">' . getCategoryName($photo['category_id'], $categories) . '</a></p>';
-        echo '</div>';
-    }
-}
-
-echo '</div>';
-
+        $counter = 0;
+        foreach ($photos as $photo) {
+            if ($photo['category_id'] == $category_id) {
+                if ($counter % 3 == 0 && $counter > 0) {
+                    echo '<div style="flex-basis: 100%; height: 0;"></div>'; // Nowy wiersz po 3 miniaturach
+                }
+                echo '<div style="margin: 5px; text-align: center; flex-basis: 30%;">';
+                echo '<a href="?id=4&img_id=' . $photo['img_id'] . '">';
+                echo '<img src="' . $photo['img'] . '" style="width:150px; height:auto;"><br>';
+                echo '</a>';
+                echo '<p>' . $photo['opis'] . '</p>';
+                echo '<p>Category: <a href="?id=4&category_id='.$photo['category_id'].'">'.getCategoryName($photo['category_id'], $categories).'</a></p>';
+                echo '</div>';
+                $counter++;
+            }
+        }
 
         echo '</div>';
     } else {
         // Wyświetlanie galerii wszystkich zdjęć, jeśli nie wybrano kategorii
         echo '<h2>All Photos</h2>';
-        echo '<div style="display: flex; flex-wrap: wrap; justify-content: space-between;">';
+        echo '<div style="display: flex; flex-wrap: wrap;">';
 
+        $counter = 0;
         foreach ($photos as $photo) {
-            echo '<div style="flex: 1 1 calc(33% - 20px); margin: 10px; text-align: center; box-sizing: border-box;">';
+            if ($counter % 3 == 0 && $counter > 0) {
+                echo '<div style="flex-basis: 100%; height: 0;"></div>'; // Nowy wiersz po 3 miniaturach
+            }
+            echo '<div style="margin: 5px; text-align: center; flex-basis: 30%;">';
             echo '<a href="?id=4&img_id=' . $photo['img_id'] . '">';
-            echo '<img src="' . $photo['img'] . '" style="width: 100%; height: auto; max-width: 100%;">';
+            echo '<img src="' . $photo['img'] . '" style="width:150px; height:auto;"><br>';
             echo '</a>';
             echo '<p>' . $photo['opis'] . '</p>';
-            echo '<p><a href="?id=4&category_id=' . $photo['category_id'] . '">' . getCategoryName($photo['category_id'], $categories) . '</a></p>';
+            echo '<p>Category: <a href="?id=4&category_id='.$photo['category_id'].'">'.getCategoryName($photo['category_id'], $categories).'</a></p>';
             echo '</div>';
+            $counter++;
         }
 
         echo '</div>';
     }
 }
+?>
