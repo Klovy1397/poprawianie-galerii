@@ -18,25 +18,12 @@ $podstrony = [
     ]
 ];
 
+include('social.php');
+
 $zdjecia = [
         'Losowe zdjęcie 1' => "https://picsum.photos/300/200?random=1",
         'Losowe zdjęcie 2' => "https://picsum.photos/300/200?random=2",
         'Losowe zdjęcie 3' => "https://picsum.photos/300/200?random=3", 
-];
-
-$media = [
-    [
-    'link' => "https://www.youtube.com" ,
-    'foto' => "https://cdn.iconscout.com/icon/free/png-256/free-youtube-logo-icon-download-in-svg-png-gif-file-formats--social-media-70-flat-icons-color-pack-logos-432560.png?f=webp&w=256"
-    ],
-    [
-    'link' => "https://www.discord.com", 
-    'foto' => "https://darkanddarker.wiki.spellsandguns.com/images/thumb/1/15/Discord_logo.webp/213px-Discord_logo.webp.png"
-    ],
-    [
-    'link' => "https://telegram.org",
-    'foto' => "https://upload.wikimedia.org/wikipedia/commons/thumb/8/82/Telegram_logo.svg/1024px-Telegram_logo.svg.png"
-    ],           
 ];
 
 $reklama = [
@@ -126,13 +113,7 @@ if (!isset($podstrony[$id])) {
 				</section>
 				<section>
 					<h3>Social media</h3>
-					<?php             
-                        foreach ($media as $item) {
-                            echo '<a href="' . $item['link'] . '" target="_blank">';
-                            echo '<img src="' . $item['foto'] . '" alt="Logo" style="width: 50px; height: 50px; margin-right: 10px;">';
-                            echo '</a>';
-                        }
-                        ?>
+                    <p><?php social_links(); ?>
 				</section>
 			</aside>
 		</div>
