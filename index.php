@@ -118,7 +118,11 @@ if (!isset($podstrony[$id])) {
 				</nav>
 				<section>
 					<h3>Reklamy</h3>
-					<p>Pozdrowienia dla 4P...</p>
+                    <?php
+                    echo "<a href=\"$wybranaReklama\">Kliknij tutaj, aby zobaczyć reklamę</a>";
+                    ?>
+				</section>
+				<section>
 				</section>
 				<section>
 					<h3>Social media</h3>
