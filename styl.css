@@ -1,0 +1,46 @@
+@media only screen and (min-width: 900px) {
+    #kontener { 
+        width: 850px; 
+        margin: 0 auto; 
+    }
+    main { 
+        float: left; 
+        width: 70%; 
+    }
+    aside { 
+        float: right; 
+        width: 28%; 
+    }
+    footer { 
+        clear: both; 
+    }
+}
+
+.container {
+    display: flex;
+    flex-wrap: wrap;
+    width: 100%; 
+}
+
+.day-box {
+    width: 13.3%;
+    border: 1px solid black;
+    margin: 1px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 12px;
+}
+
+.niedziela {
+    color: red;
+}
+
+.dzis {
+    font-weight: bold;
+}
+
+.wyrozniony {
+    color: green;
+    font-weight: bold;
+}
