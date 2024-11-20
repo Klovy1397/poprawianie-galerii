@@ -1,5 +1,4 @@
 <div class="container">
-    <!-- Nazwy dni tygodnia -->
     <div class="day-box">Pn</div>
     <div class="day-box">Wt</div>
     <div class="day-box">Śr</div>
@@ -14,28 +13,35 @@
     }
 
     function dniDoPoprzPon() {
-        $dzisiaj = date('N'); // Numer dnia tygodnia (1 = poniedziałek, 7 = niedziela)
-        return $dzisiaj - 1; // Liczba dni do poprzedniego poniedziałku
+        $dzisiaj = date('N'); 
+        return $dzisiaj - 1; 
     }
 
-    $highlightedDate = "20-11-2024"; // Data do wyróżnienia
+    $highlightedDate = "20-11-2024"; 
+    $currentWeekStart = date('d-m-Y', strtotime('monday this week'));
+    $currentWeekEnd = date('d-m-Y', strtotime('sunday this week')); 
+
 
     for ($i = -dniDoPoprzPon(); $i < 30 - dniDoPoprzPon(); $i++) {
         $currentDate = liczbaNaDate($i);
         $isSunday = date('N', strtotime("{$i} days")) == 7;
         $dodatkowe_klasy = $isSunday ? ' niedziela' : '';
 
-        // Sprawdzenie, czy dzień jest dzisiejszy
+
+        if ($currentDate >= $currentWeekStart && $currentDate <= $currentWeekEnd) {
+            $dodatkowe_klasy .= ' this_week';
+        }
+
+
         if ($currentDate == date("d-m-Y")) {
             $dodatkowe_klasy .= ' dzis';
         }
 
-        // Sprawdzenie, czy dzień to 20-11-2024
+
         if ($currentDate == $highlightedDate) {
             $dodatkowe_klasy .= ' wyrozniony';
         }
 
-        // Wyświetlanie pojedynczego dnia z odpowiednimi klasami
         echo '<div class="day-box' . $dodatkowe_klasy . '">' . $currentDate . '</div>';
     }
     ?>
